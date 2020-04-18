@@ -9,20 +9,32 @@
 	// tabs
 	let tabs = ['Current Polls', 'Add New Poll'];
 	let activeTab = 'Current Polls';
+
+	const tabChange = (e) => {
+		console.log(e.detail);
+
+		activeTab = e.detail;
+	};
 </script>
 
 <Header />
 
 <main>
 	<!-- tabs -->
-	<Tabs {activeTab} {tabs}/>
+	<Tabs {activeTab} {tabs} on:tabChange={tabChange} />
+
+	{#if activeTab === 'Current Polls'}
+		<p>Polls list component goes here</p>
+	{:else if activeTab === 'Add New Poll'}
+		<p>New Poll component goes here</p>
+	{/if}
 </main>
 
 <Footer />
 
 <style>
 	main {
-		max-width: 60rem;
+		max-width: 50rem;
 		margin: 2rem auto;
 	}
 </style>
