@@ -2,6 +2,8 @@
 	// components
 	import Header from './components/Header.svelte';
 	import Footer from './components/Footer.svelte';
+	// create form
+	import CreateForm from './components/CreateForm.svelte';
 
 	// tabs
 	import Tabs from './shared/Tabs.svelte';
@@ -26,7 +28,7 @@
 	{#if activeTab === 'Current Polls'}
 		<p>Polls list component goes here</p>
 	{:else if activeTab === 'Add New Poll'}
-		<p>New Poll component goes here</p>
+		<CreateForm />
 	{/if}
 </main>
 
