@@ -10,8 +10,8 @@
     {#each polls as poll (poll.id)}
         <!-- <div>{poll.question}</div> -->
 
-        <!-- poll details component -->
-        <PollDetails {poll} />
+        <!-- poll details component and voting functionality event forwarding --> 
+        <PollDetails {poll} on:vote />
     {/each}
 </div>
 

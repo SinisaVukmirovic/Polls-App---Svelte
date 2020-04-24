@@ -38,6 +38,27 @@
 
 		activeTab = 'Current Polls';
 	};
+
+	// voting functionality (forwarded event)
+	const handleVote = (e) => {
+		// console.log(e.detail);
+		const { id, option } = e.detail;
+
+		let copiedPolls = [...polls];
+
+		// finding the poll that was clicked on / voted on
+		let upvotedPoll = copiedPolls.find(poll => poll.id == id);
+
+		// upvoting option that was voted for
+		if (option === 'a') {
+			upvotedPoll.votesA++;
+		}
+		if (option === 'b') {
+			upvotedPoll.votesB++;
+		}
+
+		polls = copiedPolls;
+	};
 </script>
 
 <Header />
@@ -48,7 +69,7 @@
 
 	{#if activeTab === 'Current Polls'}
 		<!-- <p>Polls list component goes here</p> -->
-		<PollList {polls} />
+		<PollList {polls} on:vote={handleVote} />
 	{:else if activeTab === 'Add New Poll'}
 		<CreateForm on:addPoll={handleAdd} />
 	{/if}
