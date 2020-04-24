@@ -7,7 +7,7 @@
 
 <style>
     header {
-        background: #222;
+        background: #242424;
         padding: 1rem;
     }
     h1 {
