@@ -20,15 +20,17 @@
 		activeTab = e.detail;
 	};
 
+	// substituting data below with data from store
+
 	// adding new polls
-	let polls = [{
-		id: 1,
-		question: 'JavaScript or Python?',
-		answerA: 'JavaScript',
-		answerB: 'Python',
-		votesA: 17,
-		votesB: 8
-	}];
+	// let polls = [{
+	// 	id: 1,
+	// 	question: 'JavaScript or Python?',
+	// 	answerA: 'JavaScript',
+	// 	answerB: 'Python',
+	// 	votesA: 17,
+	// 	votesB: 8
+	// }];
 
 	const handleAdd = (e) => {
 		const poll = e.detail;
@@ -69,7 +71,9 @@
 
 	{#if activeTab === 'Current Polls'}
 		<!-- <p>Polls list component goes here</p> -->
-		<PollList {polls} on:vote={handleVote} />
+		<!-- <PollList {polls} on:vote={handleVote} /> -->
+		<!-- now using data from store -->
+		<PollList on:vote={handleVote} />
 	{:else if activeTab === 'Add New Poll'}
 		<CreateForm on:addPoll={handleAdd} />
 	{/if}
