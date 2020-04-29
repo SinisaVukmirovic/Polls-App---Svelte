@@ -8,6 +8,9 @@
     // poll detail component
     import PollDetails from './PollDetails.svelte';
 
+    // commenting out all life cycle methods because we will use automatic
+    // sub and unsub scription by refering PollStore store file
+
     // export let polls = [];
 
     // subscribing to data in store
@@ -37,12 +40,16 @@
 <!-- MarkUp -->
 <div class="poll-list">
     <!-- {#each polls as poll (poll.id)} -->
-    <!-- to make subscribe and unsubscribe automatic, we replace pools variable with component -->
+    <!-- to make subscribe and unsubscribe automatic, 
+    <!-- we replace pools variable with referance to store file --> 
     {#each $PollStore as poll (poll.id)}
         <!-- <div>{poll.question}</div> -->
 
         <!-- poll details component and voting functionality event forwarding --> 
-        <PollDetails {poll} on:vote />
+        <!-- <PollDetails {poll} on:vote /> -->
+
+        <!-- using store and data in components, no need to pass it here anymore -->
+        <PollDetails {poll} />
     {/each}
 </div>
 

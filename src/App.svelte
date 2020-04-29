@@ -32,35 +32,42 @@
 	// 	votesB: 8
 	// }];
 
+	// const handleAdd = (e) => {
+	// 	const poll = e.detail;
+
+	// 	polls = [poll, ...polls];
+	// 	console.log(polls);
+
+	// 	activeTab = 'Current Polls';
+	// };
+
+	// using store so we no longer need stuff above, just...
 	const handleAdd = (e) => {
-		const poll = e.detail;
-
-		polls = [poll, ...polls];
-		console.log(polls);
-
 		activeTab = 'Current Polls';
 	};
 
 	// voting functionality (forwarded event)
-	const handleVote = (e) => {
-		// console.log(e.detail);
-		const { id, option } = e.detail;
+	// const handleVote = (e) => {
+	// 	// console.log(e.detail);
+	// 	const { id, option } = e.detail;
 
-		let copiedPolls = [...polls];
+	// 	let copiedPolls = [...polls];
 
-		// finding the poll that was clicked on / voted on
-		let upvotedPoll = copiedPolls.find(poll => poll.id == id);
+	// 	// finding the poll that was clicked on / voted on
+	// 	let upvotedPoll = copiedPolls.find(poll => poll.id == id);
 
-		// upvoting option that was voted for
-		if (option === 'a') {
-			upvotedPoll.votesA++;
-		}
-		if (option === 'b') {
-			upvotedPoll.votesB++;
-		}
+	// 	// upvoting option that was voted for
+	// 	if (option === 'a') {
+	// 		upvotedPoll.votesA++;
+	// 	}
+	// 	if (option === 'b') {
+	// 		upvotedPoll.votesB++;
+	// 	}
 
-		polls = copiedPolls;
-	};
+	// 	polls = copiedPolls;
+	// };
+
+	// using store so we don't need handleVote here
 </script>
 
 <Header />
@@ -73,7 +80,10 @@
 		<!-- <p>Polls list component goes here</p> -->
 		<!-- <PollList {polls} on:vote={handleVote} /> -->
 		<!-- now using data from store -->
-		<PollList on:vote={handleVote} />
+		<!-- <PollList on:vote={handleVote} /> -->
+		<!-- refactored code to use store and dat inside the componenet, 
+		no need to pass it here anymore-->
+		<PollList />
 	{:else if activeTab === 'Add New Poll'}
 		<CreateForm on:addPoll={handleAdd} />
 	{/if}

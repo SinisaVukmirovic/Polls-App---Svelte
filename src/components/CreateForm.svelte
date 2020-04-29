@@ -1,4 +1,7 @@
 <script>
+    // importing store
+    import PollStore from '../stores/PollStore.js';
+
     import Button from '../shared/Button.svelte';
 
     // Adding new polls
@@ -61,7 +64,14 @@
             // adding new polls
             let newPoll = {...fieldValues, votesA: 0, votesB: 0, id: Math.random()};
 
-            dispatch('addPoll', newPoll);
+            // updating data in store
+            PollStore.update(currentPolls => {
+                return [newPoll, ...currentPolls];
+            });
+
+            // dispatch('addPoll', newPoll);
+            // using store instead of passing data
+            dispatch('addPoll');
         }
     };
 </script>
