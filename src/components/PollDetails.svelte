@@ -9,6 +9,9 @@
     // importing store
     import PollStore from '../stores/PollStore.js';
 
+    // deleting polls
+    import Button from '../shared/Button.svelte';
+
     export let poll;
 
     // const dispatch = createEventDispatcher();
@@ -45,6 +48,13 @@
             return copiedPolls;
         });
     };
+
+    // deleting a poll functionality
+    const handleDelete = (id) => {
+        PollStore.update(currentPolls => {
+            return currentPolls.filter(poll => poll.id != id);
+        });
+    };
 </script>
 
 <!-- MarkUp -->
@@ -61,6 +71,11 @@
         <div class="answer" on:click={()=> handleVote('b', poll.id)}>
             <div class="percent percent-b" style="width: {percentB}%"></div>
             <span>{ poll.answerB } ({ poll.votesB })</span>
+        </div>
+
+        <div class="delete">
+            <!-- usrrounding handl function in an inline function to prevent invoking it automatically, since we are pass arguments in it -->
+            <Button flat={true} on:click={() => handleDelete(poll.id)}>Delete</Button>
         </div>
     </div>
 </Card>
@@ -101,4 +116,9 @@
             border-left: 4px solid lime;
             background: rgba(0, 255, 0, .3);
         }
+
+    .delete {
+        margin-top: 2rem;
+        text-align: center;
+    }
 </style>
