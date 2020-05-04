@@ -7,12 +7,28 @@ import { writable } from 'svelte/store';
 const PollStore = writable([
     {
         id: 1,
-        question: 'JavaScript or Python?',
-        answerA: 'JavaScript',
-        answerB: 'Python',
-        votesA: 17,
-        votesB: 8
+        question: 'Svelte or React?',
+        answerA: 'Svelte',
+        answerB: 'React',
+        votesA: 26,
+        votesB: 5
     },
+    {
+        id: 2,
+        question: 'LOL or DOTA?',
+        answerA: 'LOL',
+        answerB: 'DOTA',
+        votesA: 11,
+        votesB: 42
+    },
+    {
+        id: 3,
+        question: 'ManUTD or Liverpool?',
+        answerA: 'ManUTD',
+        answerB: 'Liverpool',
+        votesA: 63,
+        votesB: 17
+    }
 ]);
 
 export default PollStore;

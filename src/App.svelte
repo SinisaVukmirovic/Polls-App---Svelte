@@ -15,7 +15,7 @@
 	let activeTab = 'Current Polls';
 
 	const tabChange = (e) => {
-		console.log(e.detail);
+		// console.log(e.detail);
 
 		activeTab = e.detail;
 	};
