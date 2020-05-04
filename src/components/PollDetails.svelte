@@ -14,13 +14,17 @@
 
     export let poll;
 
+	// tweens and animations
+	import { tweened } from 'svelte/motion';
+
     // const dispatch = createEventDispatcher();
 
     // reactive values
     $: totalVotes = poll.votesA + poll.votesB;
     // vote bars
-    $: percentA = Math.floor(100 / totalVotes * poll.votesA);
-    $: percentB = Math.floor(100 / totalVotes * poll.votesB);
+    $: percentA = Math.floor(100 / totalVotes * poll.votesA) || 0;
+    $: percentB = Math.floor(100 / totalVotes * poll.votesB) || 0;
+    // adding default 0 for tweened if the value in Math ends up being NaN or undefined
 
     // voting functionality
     // const handleVote = (option, id) => {
@@ -55,6 +59,15 @@
             return currentPolls.filter(poll => poll.id != id);
         });
     };
+
+    // tween and animation
+    // tweened percentages
+    const tweenedPercentA = tweened(0);
+    const tweenedPercentB = tweened(0);
+
+    $:tweenedPercentA.set(percentA);
+    $:tweenedPercentB.set(percentB);
+    // $: console.log($tweenedPercentA, $tweenedPercentB);
 </script>
 
 <!-- MarkUp -->
@@ -65,11 +78,15 @@
         <p>Total votes: { totalVotes }</p>
 
         <div class="answer" on:click={()=> handleVote('a', poll.id)}>
-            <div class="percent percent-a" style="width: {percentA}%"></div>
+            <!-- <div class="percent percent-a" style="width: {percentA}%"></div> -->
+            <!-- tween and animtion -->
+            <div class="percent percent-a" style="width: {$tweenedPercentA}%"></div>
             <span>{ poll.answerA } ({ poll.votesA })</span>
         </div>
         <div class="answer" on:click={()=> handleVote('b', poll.id)}>
-            <div class="percent percent-b" style="width: {percentB}%"></div>
+            <!-- <div class="percent percent-b" style="width: {percentB}%"></div> -->
+            <!-- tween and animtion -->
+            <div class="percent percent-b" style="width: {$tweenedPercentB}%"></div>
             <span>{ poll.answerB } ({ poll.votesB })</span>
         </div>
 
@@ -95,9 +112,10 @@
         cursor: pointer;
         margin: .8rem auto;
         position: relative;
+        transition: all 250ms ease;
     }
         .answer:hover {
-            background: #111;
+            background: #000;
         }
     span {
         display: inline-block;
